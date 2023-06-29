@@ -1,4 +1,13 @@
+package org.CFT.resources;
+
 import io.swagger.annotations.Api;
+import org.CFT.api.SalesEmployeeService;
+import org.CFT.cli.SalesEmployeeRequest;
+import org.CFT.client.*;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Api("SalesEmployees")
@@ -15,7 +24,7 @@ public class SalesEmployeeController {
     public Response getSalesEmployees() {
         try {
             return Response.ok(salesEmployeeService.getAllSalesEmployees()).build();
-        } catch (FailedToGetSalesEmployeesException e) {
+        } catch (FailedToGetSalesEmployeeException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
         }
@@ -27,7 +36,7 @@ public class SalesEmployeeController {
     public Response getSalesEmployeeById(@PathParam("id") int id) {
         try {
             return Response.ok(salesEmployeeService.getSalesEmployeeById(id)).build();
-        } catch (FailedToGetSalesEmployeesException e) {
+        } catch (FailedToGetSalesEmployeeException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
         } catch (SalesEmployeeDoesNotExistException e){
