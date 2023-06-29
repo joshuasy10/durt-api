@@ -15,7 +15,7 @@ public class SalesEmployeeDao {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT id, name, salary, national_insurance_number, bank_account_number, commission_rate FROM SalesEmployees;");
+        ResultSet rs = st.executeQuery("SELECT id, name, salary, national_insurance_number, bank_account_number, commission_rate FROM sales_employees;");
 
         List<SalesEmployee> sales_employee_list = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class SalesEmployeeDao {
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery("SELECT id, name, salary, national_insurance_number, bank_account_number, commission_rate" +
-                " FROM SalesEmployees WHERE id=" + id);
+                " FROM sales_employees WHERE id=" + id);
 
         while (rs.next()) {
             return new SalesEmployee (
@@ -56,7 +56,7 @@ public class SalesEmployeeDao {
     public int createSalesEmployee(SalesEmployeeRequest sales_employee) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO SalesEmployees (id, name, salary, national_insurance_number, bank_account_number, commission_rate) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertStatement = "INSERT INTO sales_employees (name, salary, national_insurance_number, bank_account_number, commission_rate) VALUES (?, ?, ?, ?, ?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
@@ -78,7 +78,7 @@ public class SalesEmployeeDao {
     public void updateSalesEmployee(int id, SalesEmployeeRequest sales_employee) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
-        String updateStatement = "UPDATE SalesEmployees SET name = ?, salary = ?, national_insurance_number = ?, bank_account_number = ?, commission_rate = ? WHERE id = ?";
+        String updateStatement = "UPDATE sales_employees SET name = ?, salary = ?, national_insurance_number = ?, bank_account_number = ?, commission_rate = ? WHERE id = ?";
 
         PreparedStatement st = c.prepareStatement(updateStatement);
 
@@ -95,7 +95,7 @@ public class SalesEmployeeDao {
 
         Connection c = databaseConnector.getConnection();
 
-        String delete_statement = "DELETE FROM SalesEmployees WHERE id = ?";
+        String delete_statement = "DELETE FROM sales_employees WHERE id = ?";
 
         PreparedStatement st = c.prepareStatement(delete_statement);
 
