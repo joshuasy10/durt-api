@@ -1,15 +1,11 @@
 package org.CFT.resources;
 import io.swagger.annotations.Api;
-<<<<<<< HEAD
 import org.CFT.api.ClientService;
 import org.CFT.cli.ClientRequest;
 import org.CFT.client.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-=======
->>>>>>> dfa3910 (oh no)
-
 
 @Api("Client")
 @Path("/api")
