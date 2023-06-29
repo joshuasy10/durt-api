@@ -6,7 +6,9 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.CFT.resources.ClientController;
 import org.CFT.resources.DeliveryEmployeeController;
+import org.CFT.resources.ProjectController;
 import org.CFT.resources.SalesEmployeeController;
 
 public class trueApplication extends Application<trueConfiguration> {
@@ -37,6 +39,8 @@ public class trueApplication extends Application<trueConfiguration> {
         // TODO: implement application
         environment.jersey().register(new SalesEmployeeController());
         environment.jersey().register(new DeliveryEmployeeController());
+        environment.jersey().register(new ClientController());
+        environment.jersey().register(new ProjectController());
     }
 
 }
