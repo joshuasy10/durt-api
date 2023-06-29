@@ -3,9 +3,11 @@ package org.CFT.api;
 import org.CFT.client.ClientDoesNotExistException;
 import org.CFT.client.FailedToCreateClientException;
 import org.CFT.client.FailedToDeleteClientException;
+import org.CFT.cli.ClientRequest;
+import org.CFT.client.*;
 import org.CFT.db.Client_Dao;
+import org.CFT.core.ClientValidator;
 import org.CFT.cli.Client;
-import org.CFT.client.FailedToGetClientException;
 
 
 import java.sql.SQLException;
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class ClientService {
     private Client_Dao clientDao = new Client_Dao();
+    private ClientValidator clientValidator = new ClientValidator();
 
     public List<Client> getAllClients() throws FailedToGetClientException{
         try{
@@ -38,9 +41,9 @@ public class ClientService {
         }
     }
 
-    public int createCustomer(ClientRequest customer) throws FailedToCreateClientException, InvalidClientException {
+    public int createClient(ClientRequest client) throws FailedToCreateClientException, InvalidClientException {
         try {
-            String validation = clientValidator.isValidCustomer(customer);
+            String validation = clientValidator.isValidClient(client);
             if(validation != null){
                 throw new InvalidClientException(validation);
             }
@@ -54,6 +57,27 @@ public class ClientService {
         } catch(SQLException e) {
             System.err.println(e.getMessage());
             throw new FailedToCreateClientException();
+        }
+    }
+
+    public void updateClient(ClientRequest client, int id) throws FailedToUpdateClientException, ClientDoesNotExistException, InvalidClientException {
+        try{
+            String validation = clientValidator.isValidClient(client);
+            if(validation != null){
+                throw new InvalidClientException(validation);
+            }
+
+            Client clientToUpdate = clientDao.getClientByID(id);
+
+            if(clientToUpdate == null){
+                throw new ClientDoesNotExistException();
+            }
+
+            clientDao.updateClient(id, client);
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToUpdateClientException();
         }
     }
 

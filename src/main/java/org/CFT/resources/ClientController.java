@@ -1,11 +1,14 @@
 package org.CFT.resources;
 import io.swagger.annotations.Api;
+<<<<<<< HEAD
 import org.CFT.api.ClientService;
 import org.CFT.cli.ClientRequest;
 import org.CFT.client.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+=======
+>>>>>>> dfa3910 (oh no)
 
 
 @Api("Client")
@@ -31,7 +34,7 @@ public class ClientController {
     @GET
     @Path("/client/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getClientById(@PathParam("id") int id) {
+    public Response getClientByID(@PathParam("id") int id) {
         try {
             return Response.ok(clientService.getClientByID(id)).build();
         } catch (FailedToGetClientException e) {
@@ -63,7 +66,7 @@ public class ClientController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateClientById(@PathParam("id") int id, ClientRequest client) {
         try {
-            clientService.updateClient(id, client);
+            clientService.updateClient(client, id);
             return Response.ok().build();
         } catch (ClientDoesNotExistException e){
             System.err.println((e.getMessage()));

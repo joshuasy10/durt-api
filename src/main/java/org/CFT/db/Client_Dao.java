@@ -77,6 +77,22 @@ public class Client_Dao {
         return -1;
     }
 
+    public void updateClient(int id, ClientRequest client) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String updateStatement = "UPDATE `clients` SET name = ?, address = ?, phone_number = ?, sales_employee_id = ? WHERE id = ?";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, client.getName());
+        st.setString(2, client.getAddress());
+        st.setString(3, client.getPhone_Number());
+        st.setInt(4, client.getSales_Employee_ID());
+        st.setInt(5, id);
+
+        st.executeUpdate();
+    }
+
     public void deleteClient(int id) throws SQLException {
         try (Connection c = databaseConnector.getConnection()){
             String deleteStatement = "DELETE FROM clients WHERE id = ?";
