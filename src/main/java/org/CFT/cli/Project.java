@@ -2,16 +2,25 @@ package org.CFT.cli;
 
 public class Project {
     private int ID;
-    private int Client_ID;
+    private int client_id;
     private String Name;
     private double Value;
+    private int tech_lead_id;
 
+    public int getTech_lead_id() {
+        return tech_lead_id;
+    }
 
-    public Project(int ID, int client_ID, String name, double value) {
+    public void setTech_lead_id(int tech_lead_id) {
+        this.tech_lead_id = tech_lead_id;
+    }
+
+    public Project(int ID, int client_id, String name, double value, int tech_lead_id) {
         setID(ID);
         setName(name);
         setValue(value);
-        setClient_ID(client_ID);
+        setClient_ID(client_id);
+        setTech_lead_id(tech_lead_id);
     }
 
     public int getID() {
@@ -39,10 +48,10 @@ public class Project {
     }
 
     public int getClient_ID() {
-        return Client_ID;
+        return client_id;
     }
 
     public void setClient_ID(int client_ID) {
-        Client_ID = client_ID;
+        client_id = client_id;
     }
 }
