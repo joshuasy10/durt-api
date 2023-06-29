@@ -83,23 +83,23 @@ BEGIN
 			
 	CREATE TABLE IF NOT EXISTS project_employees (
 	project_id SMALLINT UNSIGNED NOT NULL,
-	delivery_employee SMALLINT UNSIGNED NOT NULL,
+	delivery_employee_id SMALLINT UNSIGNED NOT NULL,
 	joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, employee_id),
+	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, delivery_employee_id),
 	FOREIGN KEY (project_id) REFERENCES projects(id),
-	FOREIGN KEY (delivery_employee) REFERENCES delivery_employees(id)
+	FOREIGN KEY (delivery_employee_id) REFERENCES delivery_employees(id)
 	);     
 			
 	CREATE TABLE IF NOT EXISTS project_employee_logs (
 	project_id SMALLINT UNSIGNED NOT NULL,
-	delivery_employee SMALLINT UNSIGNED NOT NULL,
+	delivery_employee_id SMALLINT UNSIGNED NOT NULL,
 	joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	left_at TIMESTAMP,
 
-	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, delivery_employee),
+	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, delivery_employee_id),
 	FOREIGN KEY (project_id) REFERENCES projects(id),
-	FOREIGN KEY (delivery_employee) REFERENCES delivery_employees(id)
+	FOREIGN KEY (delivery_employee_id) REFERENCES delivery_employees(id)
 	);       
 
 	
