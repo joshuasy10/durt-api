@@ -15,7 +15,7 @@ public class Project_Dao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT id, client_id, name, value FROM `projects`");
+        ResultSet rs = st.executeQuery("SELECT id, client_id, name, value, lead_employee_id FROM `projects`");
 
         List<Project> projectList = new ArrayList<>();
 
@@ -24,7 +24,8 @@ public class Project_Dao {
                     rs.getInt("id"),
                     rs.getInt("client_id"),
                     rs.getString("name"),
-                    rs.getDouble("value")
+                    rs.getDouble("value"),
+                    rs.getInt("lead_employee_id")
             );
 
             projectList.add(project);
@@ -37,7 +38,7 @@ public class Project_Dao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT id, client_id, name, value FROM `projects` " +
+        ResultSet rs = st.executeQuery("SELECT id, client_id, name, value, lead_employee_id FROM `projects` " +
                 "WHERE id = " + id);
 
         List<Project> projectList = new ArrayList<>();
@@ -47,7 +48,8 @@ public class Project_Dao {
                     rs.getInt("id"),
                     rs.getInt("client_id"),
                     rs.getString("name"),
-                    rs.getDouble("value")
+                    rs.getDouble("value"),
+                    rs.getInt("lead_employee_id")
             );
         }
 
@@ -57,13 +59,14 @@ public class Project_Dao {
     public int createProject(ProjectRequest project) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO `projects`(client_id, name, value) VALUES (?,?,?)";
+        String insertStatement = "INSERT INTO `projects`(client_id, name, value, lead_employee_id) VALUES (?,?,?,?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
         st.setInt(1, project.getClient_ID());
         st.setString(2, project.getName());
         st.setDouble(3, project.getValue());
+        st.setInt(4, project.getTech_lead_id());
 
         st.executeUpdate();
 
@@ -79,14 +82,15 @@ public class Project_Dao {
     public void updateProject(int id, ProjectRequest project) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
-        String updateStatement = "UPDATE `projects` SET client_id = ?, name = ?, value = ? WHERE id = ?";
+        String updateStatement = "UPDATE `projects` SET client_id = ?, name = ?, value = ?, lead_employee_id = ? WHERE id = ?";
 
         PreparedStatement st = c.prepareStatement(updateStatement);
 
         st.setInt(1, project.getClient_ID());
         st.setString(2, project.getName());
         st.setDouble(3, project.getValue());
-        st.setInt(4, id);
+        st.setInt(4, project.getTech_lead_id());
+        st.setInt(5, id);
 
         st.executeUpdate();
     }
