@@ -1,7 +1,12 @@
 package org.CFT.resources;
 
 import io.swagger.annotations.Api;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.CFT.api.DeliveryEmployeeService;
+import org.CFT.cli.DeliveryEmployeeRequest;
+import org.CFT.client.*;
 
 
 @Api("DeliveryEmployees")
@@ -18,7 +23,7 @@ public class DeliveryEmployeeController {
     public Response getDeliveryEmployees() {
         try {
             return Response.ok(deliveryEmployeeService.getAllDeliveryEmployees()).build();
-        } catch (FailedToGetDeliveryEmployeesException e) {
+        } catch (FailedToGetDeliveryEmployeeException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
         }
@@ -30,7 +35,7 @@ public class DeliveryEmployeeController {
     public Response getDeliveryEmployeeById(@PathParam("id") int id) {
         try {
             return Response.ok(deliveryEmployeeService.getDeliveryEmployeeById(id)).build();
-        } catch (FailedToGetDeliveryEmployeesException e) {
+        } catch (FailedToGetDeliveryEmployeeException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
         } catch (DeliveryEmployeeDoesNotExistException e){

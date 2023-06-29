@@ -2,10 +2,7 @@ package org.CFT.api;
 
 import org.CFT.cli.DeliveryEmployee;
 import org.CFT.cli.DeliveryEmployeeRequest;
-import org.CFT.client.FailedToCreateDeliveryEmployeeException;
-import org.CFT.client.FailedToGetDeliveryEmployeeException;
-import org.CFT.client.FailedToUpdateDeliveryEmployeeException;
-import org.CFT.client.InvalidDeliveryEmployeeException;
+import org.CFT.client.*;
 import org.CFT.core.DeliveryEmployeeValidator;
 import org.CFT.db.DeliveryEmployeeDao;
 
@@ -21,13 +18,13 @@ public class DeliveryEmployeeService {
     public int createDeliveryEmployee(DeliveryEmployeeRequest delivery_employee) throws FailedToCreateDeliveryEmployeeException, InvalidDeliveryEmployeeException {
 
         try {
-            String validation = deliveryEmployeeValidator.isValidOrder(delivery_employee);
+            String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(delivery_employee);
 
             if (validation != null) {
                 throw new InvalidDeliveryEmployeeException(validation);
             }
 
-            int id = delvieryEmployeeDao.createDeliveryEmployee(delivery_employee);
+            int id = deliveryEmployeeDao.createDeliveryEmployee(delivery_employee);
 
             if (id == -1) {
                 throw new FailedToCreateDeliveryEmployeeException();
@@ -40,12 +37,12 @@ public class DeliveryEmployeeService {
             throw new FailedToCreateDeliveryEmployeeException();
         }
     }
-    public void updateDeliveryEmployee(int id, DeliveryEmployeeRequest delivery_employee) throws InvalidDeliveryEmployeeExceptionException, DeliveryEmployeeDoesNotExistException, FailedToUpdateDeliveryEmployeeException {
+    public void updateDeliveryEmployee(int id, DeliveryEmployeeRequest delivery_employee) throws InvalidDeliveryEmployeeException, DeliveryEmployeeDoesNotExistException, FailedToUpdateDeliveryEmployeeException {
         try {
             String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(delivery_employee);
 
             if (validation != null) {
-                throw new InvalidDeliveryEmployeeException()Exception(validation);
+                throw new InvalidDeliveryEmployeeException(validation);
             }
 
             DeliveryEmployee deliveryEmployeeToUpdate = deliveryEmployeeDao.getDeliveryEmployeeById(id);
@@ -73,7 +70,7 @@ public class DeliveryEmployeeService {
 
 
     }
-    public DeliveryEmployee getDeliveryEmployeeById(int id) throws FailedToGetOrdersException, OrderDoesNotExistException {
+    public DeliveryEmployee getDeliveryEmployeeById(int id) throws FailedToGetDeliveryEmployeeException, DeliveryEmployeeDoesNotExistException {
         try {
             DeliveryEmployee delivery_employee = deliveryEmployeeDao.getDeliveryEmployeeById(id);
 
@@ -85,6 +82,21 @@ public class DeliveryEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToGetDeliveryEmployeeException();
+        }
+    }
+
+    public void deleteDeliveryEmployee(int id) throws DeliveryEmployeeDoesNotExistException, FailedToDeleteDeliveryEmployeeException {
+        try {
+            DeliveryEmployee delivery_employee_to_delete = deliveryEmployeeDao.getDeliveryEmployeeById(id);
+
+            if (delivery_employee_to_delete == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+            deliveryEmployeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteDeliveryEmployeeException();
         }
     }
 }

@@ -1,11 +1,9 @@
 package org.CFT.api;
 
 import org.CFT.cli.SalesEmployee;
+import org.CFT.cli.SalesEmployee;
 import org.CFT.cli.SalesEmployeeRequest;
-import org.CFT.client.FailedToCreateSalesEmployeeException;
-import org.CFT.client.FailedToGetSalesEmployeeException;
-import org.CFT.client.FailedToUpdateSalesEmployeeException;
-import org.CFT.client.InvalidSalesEmployeeException;
+import org.CFT.client.*;
 import org.CFT.core.SalesEmployeeValidator;
 import org.CFT.db.SalesEmployeeDao;
 import org.CFT.db.SalesEmployeeDao;
@@ -22,7 +20,7 @@ public class SalesEmployeeService {
     public int createSalesEmployee(SalesEmployeeRequest sales_employee) throws FailedToCreateSalesEmployeeException, InvalidSalesEmployeeException {
 
         try {
-            String validation = salesEmployeeValidator.isValidOrder(sales_employee);
+            String validation = salesEmployeeValidator.isValidSalesEmployee(sales_employee);
 
             if (validation != null) {
                 throw new InvalidSalesEmployeeException(validation);
@@ -86,6 +84,21 @@ public class SalesEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToGetSalesEmployeeException();
+        }
+    }
+
+    public void deleteSalesEmployee(int id) throws SalesEmployeeDoesNotExistException, FailedToDeleteSalesEmployeeException {
+        try {
+            SalesEmployee sales_employee_to_delete = salesEmployeeDao.getSalesEmployeeById(id);
+
+            if (sales_employee_to_delete == null) {
+                throw new SalesEmployeeDoesNotExistException();
+            }
+            salesEmployeeDao.deleteSalesEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteSalesEmployeeException();
         }
     }
 }
