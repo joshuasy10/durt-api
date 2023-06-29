@@ -1,2 +1,4 @@
-package org.CFT.core;public class DeliveryEmployeeValidator {
+package org.CFT.core;
+
+public class DeliveryEmployeeValidator {
 }
