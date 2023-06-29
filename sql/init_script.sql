@@ -5,31 +5,6 @@ BEGIN
 	START TRANSACTION;
 
 
-
-	CREATE TABLE IF NOT EXISTS delivery_employees (
-        		id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        		name VARCHAR(50) NOT NULL,
-        		salary INT UNSIGNED NOT NULL,
-        		national_insurance_number VARCHAR(9) NOT NULL
-        	);
-
-    CREATE TABLE IF NOT EXISTS sales_employees (
-            id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            salary INT UNSIGNED NOT NULL,
-            national_insurance_number VARCHAR(9) NOT NULL
-        );
-
-
-    CREATE TABLE IF NOT EXISTS delivery_employees (
-            id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-             SMALLINT UNSIGNED NOT NULL,
-            FOREIGN KEY (employee_id) REFERENCES employees(id)
-        );
-
-
-
-
 	CREATE TABLE IF NOT EXISTS delivery_employees (
         id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50) NOT NULL,
