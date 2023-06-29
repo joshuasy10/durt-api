@@ -1,6 +1,7 @@
 package org.CFT.resources;
 import io.swagger.annotations.Api;
 import org.CFT.api.ClientService;
+import org.CFT.cli.ClientRequest;
 import org.CFT.client.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -1,5 +1,6 @@
 package org.CFT.api;
 
+import org.CFT.client.ClientDoesNotExistException;
 import org.CFT.client.FailedToCreateClientException;
 import org.CFT.client.FailedToDeleteClientException;
 import org.CFT.db.Client_Dao;
