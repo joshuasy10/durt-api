@@ -4,13 +4,7 @@ CREATE PROCEDURE init_script()
 BEGIN
 	START TRANSACTION;
 
-	-- part one (employee table)
-	CREATE TABLE IF NOT EXISTS employees (
-		id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-		name VARCHAR(50) NOT NULL,
-		salary INT UNSIGNED NOT NULL,
-		national_insurance_number VARCHAR(9) NOT NULL
-	);
+
 
 	CREATE TABLE IF NOT EXISTS delivery_employees (
         		id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -35,6 +29,25 @@ BEGIN
 
 
 
+
+	CREATE TABLE IF NOT EXISTS delivery_employees (
+        id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        salary DECIMAL UNSIGNED NOT NULL,
+        national_insurance_number VARCHAR(9) NOT NULL,
+        bank_account_number VARCHAR(10) NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS sales_employees (
+        id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        salary DECIMAL UNSIGNED NOT NULL,
+        national_insurance_number VARCHAR(9) NOT NULL,
+        bank_account_number VARCHAR(10) NOT NULL,
+        commission_rate FLOAT UNSIGNED NOT NULL
+    );
+
+
     
 
 	-- part three (client table)
@@ -45,47 +58,48 @@ BEGIN
 		address VARCHAR(255) NOT NULL,
 		phone VARCHAR(11) NOT NULL,
 		sales_employee_id SMALLINT UNSIGNED NOT NULL,
+		lead_employee_id SMALLINT UNSIGNED NOT NULL,
 		joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
 
-		FOREIGN KEY (sales_employee_id) REFERENCES employees(id)
-
+		FOREIGN KEY (sales_employee_id) REFERENCES sales_employees(id),
+		FOREIGN KEY (lead_employee_id) REFERENCES delivery_employees(id)
 	);
 
 	CREATE TABLE IF NOT EXISTS projects (
 	id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	client_id SMALLINT UNSIGNED NOT NULL,
 	name VARCHAR(50) NOT NULL,
-	value INT UNSIGNED NOT NULL,
+	value DECIMAL UNSIGNED NOT NULL,
 	technologies TEXT,
 	started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	completed_at TIMESTAMP,
 	lead_employee_id SMALLINT UNSIGNED NOT NULL,
 
 	FOREIGN KEY (client_id) REFERENCES clients(id),
-	FOREIGN KEY (lead_employee_id) REFERENCES employees(id)
+	FOREIGN KEY (lead_employee_id) REFERENCES delivery_employees(id)
 
 	);        
 			
 	CREATE TABLE IF NOT EXISTS project_employees (
 	project_id SMALLINT UNSIGNED NOT NULL,
-	employee_id SMALLINT UNSIGNED NOT NULL,
+	delivery_employee SMALLINT UNSIGNED NOT NULL,
 	joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
 	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, employee_id),
 	FOREIGN KEY (project_id) REFERENCES projects(id),
-	FOREIGN KEY (employee_id) REFERENCES employees(id)
+	FOREIGN KEY (delivery_employee) REFERENCES delivery_employees(id)
 	);     
 			
 	CREATE TABLE IF NOT EXISTS project_employee_logs (
 	project_id SMALLINT UNSIGNED NOT NULL,
-	employee_id SMALLINT UNSIGNED NOT NULL,
+	delivery_employee SMALLINT UNSIGNED NOT NULL,
 	joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	left_at TIMESTAMP,
 
-	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, employee_id),
+	CONSTRAINT pk_project_employee PRIMARY KEY (project_id, delivery_employee),
 	FOREIGN KEY (project_id) REFERENCES projects(id),
-	FOREIGN KEY (employee_id) REFERENCES projects(id)
+	FOREIGN KEY (delivery_employee) REFERENCES delivery_employees(id)
 	);       
 
 	
