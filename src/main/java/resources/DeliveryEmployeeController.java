@@ -1,3 +1,5 @@
+package resources;
+
 import io.swagger.annotations.Api;
 
 

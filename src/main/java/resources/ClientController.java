@@ -1,84 +1,86 @@
+package resources;
+
 import io.swagger.annotations.Api;
 
 
-@Api("Project")
+@Api("Client")
 @Path("/api")
 
-public class ProjectController {
+public class ClientController {
 
 
-    private ProjectService projectService = new ProjectService();
+    private ClientService clientService = new ClientService();
 
     @GET
-    @Path("/project")
+    @Path("/client")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProject() {
+    public Response getClient() {
         try {
-            return Response.ok(projectService.getAllProject()).build();
-        } catch (FailedToGetProjectException e) {
+            return Response.ok(clientService.getAllClient()).build();
+        } catch (FailedToGetClientException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
         }
     }
 
     @GET
-    @Path("/project/{id}")
+    @Path("/client/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProjectById(@PathParam("id") int id) {
+    public Response getClientById(@PathParam("id") int id) {
         try {
-            return Response.ok(projectService.getProjectById(id)).build();
-        } catch (FailedToGetProjectException e) {
+            return Response.ok(clientService.getClientById(id)).build();
+        } catch (FailedToGetClientException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
-        } catch (ProjectDoesNotExistException e){
+        } catch (ClientDoesNotExistException e){
             System.err.println((e.getMessage()));
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build();
         }
     }
 
     @POST
-    @Path("/project")
+    @Path("/client")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createProject(ProjectRequest project) {
+    public Response createClient(ClientRequest client) {
         try {
-            return Response.ok(projectService.createProject(project)).build();
-        } catch (FailedToCreateProjectException e) {
+            return Response.ok(clientService.createClient(client)).build();
+        } catch (FailedToCreateClientException e) {
             System.err.println((e.getMessage()));
             return Response.serverError().build();
-        } catch (InvalidProjectException e){
+        } catch (InvalidClientException e){
             System.err.println((e.getMessage()));
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
     @PUT
-    @Path("/project/{id}")
+    @Path("/client/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProjectById(@PathParam("id") int id, ProjectRequest project) {
+    public Response updateClientById(@PathParam("id") int id, ClientRequest client) {
         try {
-            projectService.updateProject(id, project);
+            clientService.updateClient(id, client);
             return Response.ok().build();
-        } catch (ProjectDoesNotExistException e){
+        } catch (ClientDoesNotExistException e){
             System.err.println((e.getMessage()));
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build();
-        } catch (InvalidProjectException e) {
+        } catch (InvalidClientException e) {
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build();
-        } catch (FailedToUpdateProjectException e){
+        } catch (FailedToUpdateClientException e){
             return Response.serverError().build();
         }
     }
 
     @DELETE
-    @Path("/project/{id}")
+    @Path("/client/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteProjectById(@PathParam("id") int id) {
+    public Response deleteClientById(@PathParam("id") int id) {
         try {
-            projectService.deleteProject(id);
+            clientService.deleteClient(id);
             return Response.ok().build();
-        } catch (ProjectDoesNotExistException e){
+        } catch (ClientDoesNotExistException e){
             System.err.println((e.getMessage()));
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build();
-        } catch (FailedToDeleteProjectException e) {
+        } catch (FailedToDeleteClientException e) {
             throw new RuntimeException(e);
         }
     }
