@@ -1,26 +1,14 @@
 package org.CFT.cli;
 
-public class Project {
-    private int ID;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.checkerframework.checker.units.qual.C;
+
+public class ProjectRequest {
     private int Client_ID;
     private String Name;
     private double Value;
 
-
-    public Project(int ID, int client_ID, String name, double value) {
-        setID(ID);
-        setName(name);
-        setValue(value);
-        setClient_ID(client_ID);
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
     public String getName() {
         return Name;
@@ -44,5 +32,15 @@ public class Project {
 
     public void setClient_ID(int client_ID) {
         Client_ID = client_ID;
+    }
+
+    @JsonCreator
+    public ProjectRequest(
+            @JsonProperty("Client_ID")int Client_ID,
+            @JsonProperty("Name")String Name,
+            @JsonProperty("Value")double Value) {
+        this.Client_ID = Client_ID;
+        this.Name = Name;
+        this.Value = Value;
     }
 }
