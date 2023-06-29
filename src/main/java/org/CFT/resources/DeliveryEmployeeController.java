@@ -1,12 +1,13 @@
 package org.CFT.resources;
 
 import io.swagger.annotations.Api;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import org.CFT.api.DeliveryEmployeeService;
 import org.CFT.cli.DeliveryEmployeeRequest;
 import org.CFT.client.*;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Api("DeliveryEmployees")

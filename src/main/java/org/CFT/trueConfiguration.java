@@ -1,10 +1,24 @@
 package org.CFT;
 
-import io.dropwizard.core.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.*;
-import jakarta.validation.constraints.*;
+import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 public class trueConfiguration extends Configuration {
     // TODO: implement service configuration
+
+    @Valid
+    @NotNull
+    private final SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
+
+    @JsonProperty("swagger")
+    public SwaggerBundleConfiguration getSwagger() {
+        swagger.setResourcePackage("org.CFT.resources");
+        String[] schemes = {"http", "https"};
+        swagger.setSchemes(schemes);
+        return swagger;
+    }
 }
