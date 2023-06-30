@@ -44,13 +44,13 @@ public class ProjectRequest {
 
     @JsonCreator
     public ProjectRequest(
-            @JsonProperty("client_id")int Client_ID,
-            @JsonProperty("name")String Name,
-            @JsonProperty("value")double Value,
-            @JsonProperty("lead_employee_id")int Tech_lead_id) {
-        this.client_id = Client_ID;
-        this.name = Name;
-        this.value = Value;
-        this.tech_lead_id = Tech_lead_id;
+            @JsonProperty("client_id")int client_id,
+            @JsonProperty("name")String name,
+            @JsonProperty("value")double value,
+            @JsonProperty("lead_employee_id")int tech_lead_id) {
+        this.client_id = client_id;
+        this.name = name;
+        this.value = value;
+        this.tech_lead_id = tech_lead_id;
     }
 }
