@@ -51,7 +51,7 @@ public class Project {
         return client_id;
     }
 
-    public void setClient_ID(int client_ID) {
-        client_id = client_id;
+    public void setClient_ID(int client_id) {
+        this.client_id = client_id;
     }
 }
