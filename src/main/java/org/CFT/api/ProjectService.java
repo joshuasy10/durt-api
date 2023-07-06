@@ -1,18 +1,16 @@
 package org.CFT.api;
 
-import org.CFT.cli.Client;
-import org.CFT.cli.ClientRequest;
 import org.CFT.cli.Project;
 import org.CFT.cli.ProjectRequest;
 import org.CFT.client.*;
 import org.CFT.core.ProjectValidator;
-import org.CFT.db.Project_Dao;
+import org.CFT.db.ProjectDao;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class ProjectService {
-    Project_Dao projectDao = new Project_Dao();
+    ProjectDao projectDao = new ProjectDao();
     ProjectValidator projectValidator = new ProjectValidator();
     public List<Project> getAllProjects() throws FailedToGetProjectException {
         try{

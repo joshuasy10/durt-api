@@ -5,7 +5,7 @@ import org.CFT.client.FailedToCreateClientException;
 import org.CFT.client.FailedToDeleteClientException;
 import org.CFT.cli.ClientRequest;
 import org.CFT.client.*;
-import org.CFT.db.Client_Dao;
+import org.CFT.db.ClientDao;
 import org.CFT.core.ClientValidator;
 import org.CFT.cli.Client;
 
@@ -14,12 +14,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ClientService {
-    private Client_Dao clientDao = new Client_Dao();
+    private ClientDao clientDao = new ClientDao();
     private ClientValidator clientValidator = new ClientValidator();
 
     public List<Client> getAllClients() throws FailedToGetClientException{
         try{
-            List<Client> clientList = clientDao.getAllClient();
+            List<Client> clientList = clientDao.getAllClients();
             return clientList;
         } catch(SQLException e) {
             System.err.println(e.getMessage());

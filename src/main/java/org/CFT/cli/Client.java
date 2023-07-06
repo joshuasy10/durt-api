@@ -3,55 +3,55 @@ package org.CFT.cli;
 public class Client {
 
     public Client(int id, String name, String address, String phone_number, int sales_employee_id){
-        setID(id);
-        setName(name);
-        setAddress(address);
-        setPhone_Number(phone_number);
-        setSales_Employee_ID(sales_employee_id);
+        this.setId(id);
+        this.setName(name);
+        this.setAddress(address);
+        this.setPhoneNumber(phone_number);
+        this.setSalesEmployeeId(sales_employee_id);
     }
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public String getPhone_Number() {
-        return Phone_Number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
-    public void setPhone_Number(String phone_Number) {
-        Phone_Number = phone_Number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public int getSales_Employee_ID() {
-        return Sales_Employee_ID;
+    public int getSalesEmployeeId() {
+        return salesEmployeeId;
     }
 
-    public void setSales_Employee_ID(int sales_Employee_ID) {
-        Sales_Employee_ID = sales_Employee_ID;
+    public void setSalesEmployeeId(int salesEmployeeId) {
+        this.salesEmployeeId = salesEmployeeId;
     }
 
-    private int ID;
-    private String Name;
-    private String Address;
-    private String Phone_Number;
-    private int Sales_Employee_ID;
+    private int id;
+    private String name;
+    private String address;
+    private String phoneNumber;
+    private int salesEmployeeId;
 }

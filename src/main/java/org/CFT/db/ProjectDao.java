@@ -1,7 +1,5 @@
 package org.CFT.db;
 
-import org.CFT.cli.Client;
-import org.CFT.cli.ClientRequest;
 import org.CFT.cli.Project;
 import org.CFT.cli.ProjectRequest;
 
@@ -9,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project_Dao {
+public class ProjectDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<Project> getAllProjects() throws SQLException {
         Connection c = databaseConnector.getConnection();

@@ -10,7 +10,7 @@ public class ClientValidator {
         if(client.getAddress().length() > 255) {
             return "Client address should be under 255 characters.";
         }
-        if(client.getPhone_Number().length() != 11) {
+        if(client.getPhoneNumber().length() != 11) {
             return "Please enter a valid phone number.";
         }
         return null;

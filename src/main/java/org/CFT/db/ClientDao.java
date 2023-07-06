@@ -7,9 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client_Dao {
+public class ClientDao {
     DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<Client> getAllClient() throws SQLException {
+    public List<Client> getAllClients() throws SQLException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
@@ -63,8 +63,8 @@ public class Client_Dao {
 
         st.setString(1, client.getName());
         st.setString(2, client.getAddress());
-        st.setString(3, client.getPhone_Number());
-        st.setInt(4, client.getSales_Employee_ID());
+        st.setString(3, client.getPhoneNumber());
+        st.setInt(4, client.getSalesEmployeeId());
 
         st.executeUpdate();
 
@@ -86,8 +86,8 @@ public class Client_Dao {
 
         st.setString(1, client.getName());
         st.setString(2, client.getAddress());
-        st.setString(3, client.getPhone_Number());
-        st.setInt(4, client.getSales_Employee_ID());
+        st.setString(3, client.getPhoneNumber());
+        st.setInt(4, client.getSalesEmployeeId());
         st.setInt(5, id);
 
         st.executeUpdate();
