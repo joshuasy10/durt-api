@@ -1,5 +1,6 @@
 package org.CFT.db;
 
+import org.CFT.cli.ClientProjectValue;
 import org.CFT.cli.Project;
 import org.CFT.cli.ProjectRequest;
 
@@ -103,5 +104,21 @@ public class ProjectDao {
 
             st.executeUpdate();
         }
+    }
+
+    public ClientProjectValue clientProjectValue() throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("select clients.name as 'clientName', SUM(projects.value) as 'totalValue' from clients inner join projects on clients.id = projects.client_id  group by clients.name ORDER BY SUM(projects.value) DESC LIMIT 1;");
+
+        while (rs.next()) {
+            return new ClientProjectValue(
+                    rs.getString("clientName"),
+                    rs.getDouble("totalValue")
+            );
+        }
+
+        return null;
     }
 }

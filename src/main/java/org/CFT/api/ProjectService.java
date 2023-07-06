@@ -1,5 +1,6 @@
 package org.CFT.api;
 
+import org.CFT.cli.ClientProjectValue;
 import org.CFT.cli.Project;
 import org.CFT.cli.ProjectRequest;
 import org.CFT.client.*;
@@ -89,6 +90,20 @@ public class ProjectService {
             System.err.println(e.getMessage());
 
             throw new FailedToDeleteProjectException();
+        }
+    }
+
+    public ClientProjectValue getClientProjectValue() throws FailedClientValue {
+        try {
+            ClientProjectValue temp = projectDao.clientProjectValue();
+            if(temp == null){
+                throw new FailedClientValue();
+            }
+            return temp;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedClientValue();
         }
     }
 }
