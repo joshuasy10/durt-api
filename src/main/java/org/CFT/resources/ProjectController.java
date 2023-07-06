@@ -90,4 +90,16 @@ public class ProjectController {
             throw new RuntimeException(e);
         }
     }
+
+    @GET
+    @Path("/clientValue")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getClientValue() {
+        try {
+            return Response.ok(projectService.getClientProjectValue()).build();
+        } catch (FailedClientValue e) {
+            System.err.println((e.getMessage()));
+            return Response.serverError().build();
+        }
+    }
 }
