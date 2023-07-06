@@ -2,6 +2,7 @@ package org.CFT.db;
 
 import org.CFT.cli.Client;
 import org.CFT.cli.ClientRequest;
+import org.CFT.cli.clientProject;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,6 +28,32 @@ public class ClientDao {
             );
 
             clientList.add(client);
+        }
+
+
+        return clientList;
+    }
+
+    public List<clientProject> getClientProjects() throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("select clients.name as 'clientName', sales_employees.name as 'employeeName', group_concat(projects.name) as 'projectName' " +
+                "from clients " +
+                "inner join sales_employees on clients.sales_employee_id " +
+                "= sales_employees.id " +
+                "inner join projects on clients.id = projects.client_id " +
+                "group by clients.name;");
+
+        List<clientProject> clientList = new ArrayList<>();
+
+        while (rs.next()) {
+            clientProject temp=new clientProject(
+                    rs.getString("clientName"),
+                    rs.getString("employeeName"),
+                    rs.getString("projectName")
+            );
+            clientList.add(temp);
         }
 
         return clientList;

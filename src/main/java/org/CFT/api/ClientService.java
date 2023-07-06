@@ -1,5 +1,6 @@
 package org.CFT.api;
 
+import org.CFT.cli.clientProject;
 import org.CFT.client.ClientDoesNotExistException;
 import org.CFT.client.FailedToCreateClientException;
 import org.CFT.client.FailedToDeleteClientException;
@@ -38,6 +39,20 @@ public class ClientService {
             System.err.println(e.getMessage());
 
             throw new FailedToGetClientException();
+        }
+    }
+
+    public List<clientProject> getClientProjects() throws clientProjectsNotFound {
+        try {
+            List<clientProject> client = clientDao.getClientProjects();
+            if(client == null){
+                throw new clientProjectsNotFound();
+            }
+            return client;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new clientProjectsNotFound();
         }
     }
 

@@ -88,4 +88,16 @@ public class ClientController {
             throw new RuntimeException(e);
         }
     }
+
+    @GET
+    @Path("/clientProjects")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getClientProject() {
+        try {
+            return Response.ok(clientService.getClientProjects()).build();
+        } catch (clientProjectsNotFound e) {
+            System.err.println((e.getMessage()));
+            return Response.serverError().build();
+        }
+    }
 }
