@@ -4,7 +4,7 @@ public abstract class Employee {
     private int id;
     private String name;
     private double salary;
-    private String nat_insurance_number;
+    private String national_insurance_number;
     private String bank_account_number;
 
     public int getId() {
@@ -32,11 +32,11 @@ public abstract class Employee {
     }
 
     public String getNat_insurance_number() {
-        return nat_insurance_number;
+        return national_insurance_number;
     }
 
-    public void setNat_insurance_number(String nat_insurance_number) {
-        this.nat_insurance_number = nat_insurance_number;
+    public void setNat_insurance_number(String national_insurance_number) {
+        this.national_insurance_number = national_insurance_number;
     }
 
     public String getBank_account_number() {
